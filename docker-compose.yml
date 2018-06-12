@@ -1,0 +1,6 @@
+Isalore:
+  container_name: isalore
+  build: ./ElectronPrototype
+  command: dotnet run
+  net: host
+
