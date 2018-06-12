@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+
+</head>
+<body>
+<div>
+    <input type="button" id="select-directory" value="Open file"/>
+    <span id="selected-file"></span>
+
+    <script>
+        (function() {
+            debugger;
+            const { ipcRenderer } = require("electron");
+
+            document.getElementById("select-directory").addEventListener("click",
+                () => {
+                    ipcRenderer.send("select-directory");
+                });
+
+            ipcRenderer.on("select-directory-reply",
+                (sender, path) => {
+                    document.getElementById("selected-file").innerText = `You selected: ${path}`;
+                });
+        }());
+    </script>
+</div>
+</body>
+</html>
