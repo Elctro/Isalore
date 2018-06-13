@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
@@ -24,9 +25,21 @@ namespace ElectronPrototype.Controllers
                     };
 
                     object[] files = await Electron.Dialog.ShowOpenDialogAsync(mainWindow, options);
-                    foreach (var file in files)
-                        if (file is string path)
-                            Process.Start("notepad.exe", path);
+                    foreach (var file in files.OfType<string>())
+                        switch (Program.OperatingSystem)
+                        {
+                            case OperatingSystem.Windows:
+                                Process.Start("notepad.exe", file);
+                                break;
+                            case OperatingSystem.Linux:
+                                Process.Start("nano", file);//TODO add extension of Vim
+                                break;
+                            case OperatingSystem.Osx:
+                                Process.Start("TextEdit", file);//TODO add extension of TextEdit
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     Electron.IpcMain.Send(mainWindow, "select-directory-reply", files);
                 });
             return View();
