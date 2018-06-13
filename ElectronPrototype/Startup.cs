@@ -52,6 +52,7 @@ namespace ElectronPrototype
                 Height = 864,
                 Show = false
             });
+            browserWindow.SetMenuBarVisibility(false);
 
             browserWindow.OnReadyToShow += () => browserWindow.Show();
             browserWindow.SetTitle("Electron.NET Prototype");
