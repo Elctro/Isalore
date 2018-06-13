@@ -1,3 +1,4 @@
+
 FROM ubuntu:16.04
 
 #update first
@@ -23,7 +24,7 @@ RUN npm install electron-packager --global
 RUN npm install --save-dev electron
 
 #xui libs
-RUN apt-get --yes install libgtk2.0-0 libxss1 libgconf-2-4 libnss3 libasound2 libx11-xcv-dev x11-apps
+RUN DEBIAN_FRONTEND=noninteractive apt-get --yes install libgtk2.0-0 libxss1 libgconf-2-4 libnss3 libasound2 xorg libcanberra-gtk-module
 
 RUN mkdir /app
 WORKDIR /app
@@ -33,3 +34,5 @@ COPY . ./
 RUN dotnet restore
 RUN dotnet electronize build /target linux
 #RUN dotnet electronize start
+
+

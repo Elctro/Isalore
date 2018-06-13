@@ -1,5 +1,10 @@
 isalore:
   container_name: isalore
   build: ./ElectronPrototype
-  command: dotnet run
+  command: dotnet electronize start
   net: host
+  volumes:
+  - "$HOME/.Xauthority:/root.Xauthority:rw"
+  - "/tmp/.X11-unix:/tmp/.X11-unix"
+  environment:
+    DISPLAY: $DISPLAY
