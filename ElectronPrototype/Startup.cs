@@ -1,4 +1,5 @@
-﻿using ElectronNET.API;
+﻿using System.Runtime.InteropServices;
+using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +43,14 @@ namespace ElectronPrototype
             });
 
             if (HybridSupport.IsElectronActive) ElectronBootstrap();
+
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                Program.OperatingSystem = OperatingSystem.Windows;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                Program.OperatingSystem = OperatingSystem.Osx;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                Program.OperatingSystem = OperatingSystem.Linux;
         }
 
         public async void ElectronBootstrap()
