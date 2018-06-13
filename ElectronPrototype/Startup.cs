@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Linq;
+using System.Runtime.InteropServices;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -62,9 +63,15 @@ namespace ElectronPrototype
                 Show = false
             });
             browserWindow.SetMenuBarVisibility(false);
-
-            browserWindow.OnReadyToShow += () => browserWindow.Show();
             browserWindow.SetTitle("Electron.NET Prototype");
+
+            browserWindow.OnReadyToShow += () =>
+            {
+                browserWindow.Show();
+
+                //For js debugging
+                Electron.WindowManager.BrowserWindows.First().WebContents.OpenDevTools();
+            };
         }
     }
 }
