@@ -8,6 +8,12 @@
     }
   },
   "profiles": {
+    "Electron.NET Prototype": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "commandLineArgs": "electronize start",
+      "workingDirectory": ".\\"
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
