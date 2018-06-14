@@ -13,7 +13,7 @@ RUN apt-get update
 RUN apt-get --yes install dotnet-sdk-2.1
 
 #install node and npm
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install --yes nodejs 
 #RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 RUN npm install npm --global
